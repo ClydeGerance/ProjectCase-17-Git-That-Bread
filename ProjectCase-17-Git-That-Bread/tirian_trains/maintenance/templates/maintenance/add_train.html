@@ -1,0 +1,46 @@
+{% extends "maintenance/home.html" %}
+
+{% block content %}
+<h2>Add Train</h2>
+<form method="POST" style="margin-bottom: 20px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="padding: 10px 20px; background-color: #004080; color: white; border: none; border-radius: 5px;">Add Train</button>
+</form>
+
+<h2>Train List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Train ID</th>
+            <th>Model</th>
+            <th>Max Speed</th>
+            <th>Seats</th>
+            <th>Toilets</th>
+            <th>Reclining Seats</th>
+            <th>Folding Tables</th>
+            <th>Disability Access</th>
+            <th>Luggage Storage</th>
+            <th>Vending Machines</th>
+            <th>Food Service</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for train in trains %}
+        <tr>
+            <td>{{ train.train_id }}</td>
+            <td>{{ train.model }}</td>
+            <td>{{ train.max_speed }}</td>
+            <td>{{ train.no_of_seats }}</td>
+            <td>{{ train.no_of_toilets }}</td>
+            <td>{{ train.has_reclining_seats }}</td>
+            <td>{{ train.has_folding_tables }}</td>
+            <td>{{ train.has_disability_access }}</td>
+            <td>{{ train.has_luggage_storage }}</td>
+            <td>{{ train.has_vending_machines }}</td>
+            <td>{{ train.has_food_service }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

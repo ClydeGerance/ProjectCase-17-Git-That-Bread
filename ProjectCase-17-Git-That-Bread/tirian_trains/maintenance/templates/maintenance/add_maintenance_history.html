@@ -1,0 +1,36 @@
+{% extends "maintenance/home.html" %}
+
+{% block content %}
+<h2>Add Maintenance History</h2>
+<form method="POST" style="margin-bottom: 20px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="padding: 10px 20px; background-color: #004080; color: white; border: none; border-radius: 5px;">Add Maintenance</button>
+</form>
+
+<h2>Maintenance History List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Maintenance ID</th>
+            <th>Task</th>
+            <th>Condition</th>
+            <th>Date Maintained</th>
+            <th>Train</th>
+            <th>Crew</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for history in maintenance_history %}
+        <tr>
+            <td>{{ history.maintenance_id }}</td>
+            <td>{{ history.task }}</td>
+            <td>{{ history.condition }}</td>
+            <td>{{ history.date_maintained }}</td>
+            <td>{{ history.train.train_id }} - {{ history.train.model }}</td>
+            <td>{{ history.crew.leader_fn }} {{ history.crew.leader_ln }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

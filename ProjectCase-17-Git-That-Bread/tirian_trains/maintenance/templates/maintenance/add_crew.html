@@ -1,0 +1,30 @@
+{% extends "maintenance/home.html" %}
+
+{% block content %}
+<h2>Add Crew</h2>
+<form method="POST" style="margin-bottom: 20px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="padding: 10px 20px; background-color: #004080; color: white; border: none; border-radius: 5px;">Add Crew</button>
+</form>
+
+<h2>Crew List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Crew ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for crew in crew %}
+        <tr>
+            <td>{{ crew.crew_id }}</td>
+            <td>{{ crew.leader_fn }}</td>
+            <td>{{ crew.leader_ln }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
